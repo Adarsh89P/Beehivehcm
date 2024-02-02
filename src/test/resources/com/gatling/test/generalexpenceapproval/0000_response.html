@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+
+    
+    <title>Beehive HRMS - GeneralExpensePayment</title>
+    <meta http-equiv="CACHE-CONTROL" content="MAX-AGE=0" />
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+    <meta http-equiv="CACHE-CONTROL" content="NO-STORE" />
+    <meta http-equiv="EXPIRES" content="0" />
+    <meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link href="/Content/img/big-bee.png" rel="icon" />
+    <link href="/css2?v=5IcM_Kn2uzV-WqBVNZVU0GfsZWkcGV9kSwNh18Chh_81" rel="stylesheet"/>
+
+    <script src="/Content/ace/assets/js/ace-extra.min.js"></script>
+    <style>
+        .gray-box {
+            background-color: #049aff;
+        }
+
+        .orange-box {
+            background: #ff6600;
+        }
+    </style>
+
+</head>
+ <body class="red-theme  ">
+
+    <input type="hidden" id="controller" value="GeneralExpensePayment" />
+    <input type="hidden" id="urlareaname" value="Expense" />
+    <input type="hidden" id="modulename" value="37" />
+    <!-- Default org level initialization -->
+      <input type="hidden" id="darkmode" />
+    <input type="hidden" id="orgCompanyLabel" value="Company" />
+    <input type="hidden" id="orgDivisionLabel" value="Division" />
+    <input type="hidden" id="orgZoneLabel" value="Zone1" />
+    <input type="hidden" id="orgTerritoryLabel" value="Territory" />
+    <input type="hidden" id="orgBranchLabel" value="Branch" />
+    <input type="hidden" id="orgWorkLocationLabel" value="Work Location" />
+    <input type="hidden" id="orgDepartmentLabel" value="Department" />
+    <input type="hidden" id="orgDeputationLabel" value="Deputation" />
+    <input type="hidden" id="orgSubDepartmentLabel" value="Sub Department" />
+
+    <div class="navbar navbar-default" id="navbar">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('navbar', 'fixed');
+            } catch (e) { }
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+
+            <div class="navbar-header">
+                <a href="/ESS/ESSDashboard" class="navbar-brand">
+                    <div class="navbar-logo">
+                            <img src="/downloader?file=https://beehivecdn.blob.core.windows.net/content/ace/assets/img/hrisdemo.beehivehcm.com_header.jpg" height="45px" width="100px" />
+                        
+                    </div>
+
+                </a>
+
+                <!-- /.brand -->
+            </div>
+                <div class="navbar-header sidebar-toggle">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+            <!-- /.navbar-header -->
+
+            <div class="navbar-header pull-right" role="navigation">
+                <ul class="my-team-buttons" onclick="return $('.loader').show();">
+                        <li id="btn-me-2">
+                            <a class=" btn-me " href="#" onclick="return letgo(0,'ESS/ESSMyTeam','0');">
+                                <i class="icon-group"></i>
+                                <span>MY TEAM</span>
+                            </a>
+                        </li>
+                    <li id="btn-me-1">
+                        <a class=" btn-me" href="#" onclick="return letgo(0,'ESS/ESSMe','0');">
+                            <i class="icon-user"></i>
+                            <span>ME</span>
+                        </a>
+
+                    </li>
+
+                </ul>
+                <ul class="nav ace-nav navbar-header">
+                    <li>
+                        <span class="nav-separator"></span>
+                    </li>
+                    <li class="">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="nav-icon-wrapper nav-bg-warning">
+                                <span class="nav-badge nav-badge-warning"></span>
+                                <span class="nav-wrapper-warning">
+                                    <i class="fas fa-link faa-shake animated"></i>
+                                    <span class="badge badge-grey"></span>
+                                </span>
+                            </span>
+                            
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close" id="main-quick-links">
+                        </ul>
+                    </li>
+                    <li class="hide" id="header-settings-menu">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="nav-icon-wrapper nav-bg-default">
+                                
+                                <span class="nav-wrapper-default  faa-parent animated-hover">
+                                    <i class="fas fa-cog faa-spin"></i>
+                                    <span class="badge badge-grey"></span>
+                                </span>
+                            </span>
+
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar navbar-blue dropdown-menu dropdown-caret dropdown-close" style="width: 700px">
+                            <li class="dropdown-header">
+                                Settings
+                            </li>
+                            <li id="modules-list-admin"></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="nav-icon-wrapper nav-bg-primary ">
+                                
+                                <span class="nav-wrapper-primary faa-parent animated-hover">
+                                    <i class="fas fa-th faa-shake "></i>
+                                    <span class="badge badge-grey"></span>
+                                </span>
+                            </span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar navbar-blue dropdown-menu dropdown-caret dropdown-close" style="width: 700px">
+                            <li class="dropdown-header">
+                                Modules
+                            </li>
+                            <li id="modules-list">
+                                <img src="/Content/img/progress.gif" class="pull-center" />
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="nav-separator"></span>
+                    </li>
+                    <li class="">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="/downloader?file=https://beehivecdn.blob.core.windows.net/content/ace/assets/qasaas/Images/1.jpg" alt="">
+                            superadmin
+                            <i class="icon-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close" id="UserMenuSettingID">
+                            
+
+                            <li>
+                                <a href="javascript:void();" onclick="return letgo(0,'HRIS/Employee/View0/1','0');">
+                                    <i class="icon-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/ResetPassword">
+                                    <i class="icon-edit"></i>
+                                    Reset Password
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="/Logout">
+                                    <i class="icon-off"></i>
+                                    Logout
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a style="background: #fee18800;">
+                                <i class="icon-laptop"></i>
+                                Theme Color
+                                </a>
+                            </li>
+                            <li style="padding: 6px 0 0 17px;border-top: 1px solid #f2f2f2;">
+                                <div class="theme-box gray-box theme-toggle" title="Lightblue Theme" data-theme="gray"></div>                                                                                                  
+                                <div class="theme-box red-box theme-toggle" title="Red Theme"  data-theme="red"></div>
+                                                 
+                                <div class="theme-box blue-box theme-toggle" title="Blue Theme" data-theme="blue" ></div>                          
+                                <div class="theme-box green-box theme-toggle" title="Green Theme" data-theme="green"></div>
+                                <div class="theme-box orange-box theme-toggle" title="Orange Theme" data-theme="orange"></div>
+                                <div class="theme-box purple-box theme-toggle" title="Purple Theme" data-theme="purple"></div>
+                                <div class="theme-box dark-box theme-toggle" title="Black Theme" data-theme="dark"></div> 
+                            </li>
+
+                            <li>
+                                <a style="background: #fee18800;">
+                                <i class=" icon-moon"></i>
+                                Dark Mode 
+                                </a>
+                            </li>
+                            <li style="padding: 6px 0 0 0px;border-top: 1px solid #f2f2f2;text-align: center;">
+                               <label class="inline">		
+                                         
+		                            <input id="dark-mode-switch" type="checkbox" class="ace ace-switch ace-switch-1">
+		                            <span class="lbl"></span>
+	                            </label>
+                            </li>
+
+
+
+                        </ul>
+                    </li>
+                </ul>
+                <!-- /.ace-nav -->
+
+
+            </div>
+            <!-- /.navbar-header -->
+        </div>
+        <!-- /.container -->
+    </div>
+
+
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed'); } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                <span class="menu-text"></span>
+            </a>
+
+
+            <div class="sidebar" id="sidebar" >
+                <script type="text/javascript">
+                    try { ace.settings.check('sidebar', 'fixed'); } catch (e) { }
+                </script>
+
+                <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                </div>
+                <!-- #sidebar-shortcuts -->
+
+                <ul class="nav nav-list" id="sidemenu"></ul>
+                <hr />
+
+                <ul class="nav nav-list" id="UlProjects"></ul>
+
+                <!-- /.nav-list -->
+                
+                <script type="text/javascript">
+                    try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
+                </script>
+            </div>
+            
+
+            <div class="main-content" >
+                    <div class="breadcrumbs">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <i class="icon-home home-icon"></i><a class="level1"></a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                <div class="page-content row" style="">
+
+                    <div class="">
+                        <!-- PAGE CONTENT BEGINS -->
+                        
+<style>
+    .summarybox {
+        border: 1px solid lightgray;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        margin-right: -5px;
+        padding: 0 10px;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+    }
+
+        .summarybox p {
+            height: 25px;
+            font-size: 14px;
+        }
+
+        .summarybox .svg-inline--fa {
+            display: inline-block;
+            font-size: 25px;
+            height: 1em;
+            overflow: visible;
+            vertical-align: -0.1em;
+            margin-right: 2px;
+        }
+
+    .display-name {
+        text-align: left;
+    }
+
+        .display-name p {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+            .display-name p:nth-of-type(2) {
+                text-transform: capitalize;
+                color: #a4a4a4;
+            }
+</style>
+<div class="crud_toolbox">
+    <div class="col-xs-12 col-md-3 col-lg-5">
+        <div class="col-md-12 title">
+            
+            
+            General Expense Payment
+            
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-9 col-lg-7">
+        <div id="grid_tools"></div>
+        <div id="div-crud">
+                          <a accesskey="I" class="btn btn-sm btn-default" href="/Expense/GeneralExpensePayment/Edit/26836" title="Click to edit a record."  data-bootstro-placement = "bottom" data-bootstro-title="Country Master"  data-bootstro-content = "Click to edit a record<br/>Shortcut Key: Alt + I"><i class="icon-edit"></i></a> <a accesskey="R" class="btn btn-sm btn-danger"  href="javascript:void(0);" onclick="return deleteRecordByID('GeneralExpensePayment',26836);" title="Click to remove the selected record." data-bootstro-placement = "bottom" data-bootstro-title="Country Master"  data-bootstro-content = "Click to remove the selected record<br/>Shortcut Key: Alt + R"><i class="icon-remove"></i></a>                         <a id="btnIntro" title="Click here for help." accesskey="H" class="btn btn-sm btn-info" href="#"><i class="icon-question"></i></a> 
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="Travel-Appl col-md-12">
+    <input type="hidden" id="hdnCompanyID" value="1" />
+    <input type="hidden" id="advamt" value="0" />
+    <input type="hidden" id="returnamt" value="0" />
+    <input type="hidden" id="hdnID" value="26836" />
+    <input type="hidden" id="hndExpNotePrintShowHideonCofig" value="value" />
+
+
+    <div class="col-sm-10 col-md-offset-1 top-margin-2per">
+        <div class="col-md-1 EmpDetails fdiv">
+            <center>
+                <a class='EmpDetailPopOver' data-placement='above' title="Employee Info" href='#'>
+                    <img class="empImg" id="profile-photo-emp" />
+                </a>
+
+                <div class="popover-content" id="popover_content_wrapper" style="display: none;">
+                    <div style="font-size: 12px; line-height: 2.3">Company: <b></b></div>
+                    <div style="font-size: 12px; line-height: 2.3">Department: <b>Credit &amp; Operations</b></div>
+                    <div style="font-size: 12px; line-height: 2.3">Division: <b></b></div>
+                    <div style="font-size: 12px; line-height: 2.3">Designation: <b></b></div>
+                    <div style="font-size: 12px; line-height: 2.3">Location: <b>Corporate Office (Mumbai)</b></div>
+                    <div style="font-size: 12px; line-height: 2.3">Official EmailId: <b>riya.sarkar@beehive.cloud</b></div>
+
+                </div>
+            </center>
+        </div>
+        <div class="col-md-11 EmpDetails sdiv">
+            <div class="col-md-6">
+                <p>Employee Code : <span id="EmpCode">AUX00017</span></p>
+                <p>Employee Name : <span id="EmpName">Deepika Jain</span></p>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+        <div class="col-md-12 top-margin-1per btm-margin-10px-individual" id="T1">
+            <div class="col-md-6 vr" id="details1">
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Department : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>Credit &amp; Operations</p>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Designation : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Office Mail : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>riya.sarkar@beehive.cloud</p>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Cost Center : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Expense Request No : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>BSSPL202320240000934</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Cash Returned : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" id="details2">
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Grade : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>-</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Work Location : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>Corporate Office (Mumbai)</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Contact No : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>8669097676</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-4 label">
+                        <label>Advance : </label>
+                    </div>
+                    <div class="col-md-8">
+                        <p>0</p>
+                    </div>
+                </div>
+
+                    <div class="col-md-12 individualBox">
+                        <div class="col-md-4 label">
+                            <label>Project : </label>
+                        </div>
+                        <div class="col-md-8">
+                            <p></p>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <hr />
+            <div class="row top-margin-1per" id="ArrovalSummary"></div>
+        </div>
+
+        <div class="col-md-12">
+            <hr />
+            <div class="row">
+                <h4>Expense Details </h4>
+                <table id="Exptable" class="table table-condensed">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row panel panel-default padding-2per" style="background-color: #f9fafb">
+                <div class="col-md-12 individualBox" id="t2">
+                    <div class="col-md-5 text-right">
+                        <label>Application Status : </label>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="green-appStatus-badge">Approved</p>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-5 text-right">
+                        <label>Payment Status : <span class="boldRed">|</span></label>
+                    </div>
+                    <div class="col-md-3">
+                        <select id="ddlPaymentStatus" class="select2-chosen input-medium clsHistory">
+                            <option value="0">Select Payment Status</option>
+                            <option value="Paid">Paid</option>
+                            <option value="UnPaid">UnPaid</option>
+                            <option value="Hold">Hold</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox" id="trPayType" style="display: none;">
+                    <div class="col-md-5 text-right">
+                        <label>Payment Type : <span class="boldRed">|</span></label>
+                    </div>
+                    <div class="col-md-3">
+                        <select id="ddlPayType" class="select2-chosen input-medium clsHistory">
+                            <option value="0">Select Payment Type</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="BT">Bank Transfer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox" id="trMonth" style="display: none;">
+                    <div class="col-md-5 text-right">
+                        <label>Month : <span class="boldRed">|</span></label>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="ddlMonth" id="ddlMonth" class="select2-chosen input-xlarge clsHistory" data-bootstro-placement="bottom" data-bootstro-title="Employee" data-bootstro-content="Enter Employee here.<br/>" placeholder="Enter Employee">
+                            <option value="0">--select--</option>
+                            <option value="1">January</option>
+                            <option value="2">Feburary</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox" id="trYear" style="display: none;">
+                    <div class="col-md-5 text-right">
+                        <label>Year : <span class="boldRed">|</span></label>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="ddlYear" id="ddlYear" class="select2-chosen input-xlarge clsHistory">
+                            <option value="0">Select Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 individualBox">
+                    <div class="col-md-5 text-right">
+                        <label>Payment Remarks : </label>
+                    </div>
+                    <div class="col-md-3">
+                            <textarea class="form-control materialize-textarea" style="resize: none;" cols="4" id="txtRemarks"> </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <hr />
+        <div class="right-align-btn">
+
+                <button id="btnSave" class="btn btn-sm btn-success" type="button"><i class="icon-ok"></i>Save</button>
+
+                <a id="btnExpensesapprove" class="btn btn-application btn-primary">Print</a>
+          
+            <a id="btnClose" accesskey="X" href="/Expense/GeneralExpenseReq" data-bootstro-placement="bottom" data-bootstro-title="ExpenseRequest Master" data-bootstro-content="Click to exit<br/>Shortcut Key: Alt + X" type="submit" class="btn btn-application btn-exit">Exit </a>
+
+        </div>
+    </div>
+    <input type="hidden" id="ClientNameid"  value="qasaas">
+    <input type="hidden" id="urlid"  value="/downloader?file=https://beehivecdn.blob.core.windows.net/content/ace/assets">
+
+
+</div>
+<link href="/Content/css/app.min.css" rel="stylesheet" />
+<link href="/Content/css/materialized.css" rel="stylesheet" />
+
+<script src="/Content/js/jquery.js"></script>
+<script src="/js?v=BTiCOknXuQkpkl6BjJ_dzVGHoQqQ0nPRxyyv2jhgzxw1"></script>
+
+<script src="/datatablejs?v=lil5mBL2H2w900NiZ4LW4u6szEIJZ6-V-D72UzSO-z81"></script>
+
+<script src="/Content/js/MasterDatatable.js"></script>
+<script src="/Areas/Expense/Content/js/GeneralExpensePayment.js"></script>
+<script src="/Content/js/materialize.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        init();
+
+        GetExpenseData("26836", "");
+        $("#btndb").remove();
+        var IsPaymentStatus = 'No';
+        if (IsPaymentStatus == "Yes") {
+            $("#ddlPaymentStatus").select2("val", '');
+            if ($("#ddlPaymentStatus").val() == "Paid") {
+                $("#ddlPayType").select2("val", '');
+                $("#trPayType").show();
+                if ($("#ddlPayType").val() == "Salary") {
+                    $("#ddlMonth").select2("val", '0');
+                    $("#ddlYear").select2("val", '');
+                    $("#trMonth").show();
+                    $("#trYear").show();
+                }
+            }
+            $("#ddlPayType").val('');
+            $('input[type="text"], select').prop("disabled", true);
+            $('.clsHistory').prop("disabled", true);
+        }
+
+    });
+</script>
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+            <!-- /#ace-settings-container  -->
+        </div>
+        <!-- /.main-container-inner -->
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="icon-double-angle-up icon-only bigger-110"></i>
+        </a>
+    </div>
+    <div class="modal loader">
+        <div class="modal-dialog modal-dialog2">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="progress-custom2"></div>
+                    <h6 class="align-center">Please wait . .  . .</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.main-container -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/Content/ace/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='~/Content/ace/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+
+    <script src="/Content/ace/assets/js/jquery.slimscroll.min.js"></script>
+        <script src="/Content/Plugins/calendar-v2/jquery-ui.custom.min.js"></script>
+    <script type="text/ecmascript">
+        $.ajaxSetup({ cache: false });
+    </script>
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='~/Content/ace/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="/Content/ace/assets/js/bootstrap.min.js"></script>
+    <script src="/Content/ace/assets/js/typeahead-bs2.min.js"></script>
+    <script src="/Content/js/ace.custom.menu.js"></script>
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            sessionStorage.AppMode = "localhost";
+            GetMenuHeader('User');
+            GetMenuHeader('Admin');
+            GetMenu2(localStorage["id"]);
+            GetQuickLink();
+            Notification_bindClicks();
+            var EmployeeID = '1';
+            var UserID = '1';
+            
+            //$(function () {;
+                //setInterval(function () { GetTasks(parseInt(EmployeeID), parseInt(UserID)); }, 10 * 60 * 1000);
+            //});
+            //GetAllWorkSpaces($("#controller").val(), EmployeeID);
+        });
+
+       
+
+        $(document).ready(function () {
+            debugger;
+            if ($("#darkmode").val() == "dark-mode") {
+            $("#dark-mode-switch").prop("checked", true);
+        }else{ $("#dark-mode-switch").prop("checked", false);}
+
+            $(".theme-toggle").click(function () {
+                debugger;
+                var theme = $(this).data("theme");
+                debugger
+                SaveTheme(theme);
+                console.log(theme);
+                $("body").removeClass().addClass(theme + "-theme");
+                if ($('#dark-mode-switch').is(':checked')) {
+                    // If checked, add the desired class to the body element
+                    $('body').addClass('dark-mode');
+                }
+            });
+
+            $('#dark-mode-switch').change(function () {
+                // Check if the checkbox is checked
+                debugger;
+                var a = $("#dark-mode-switch").is(':checked');
+                SaveDarkTheme($("#dark-mode-switch").is(':checked') == true ? true : false)
+
+                if ($(this).is(':checked')) {
+                    // If checked, add the desired class to the body element
+                    $('body').addClass('dark-mode');
+                } else {
+                    // If unchecked, remove the class from the body element
+                    $('body').removeClass('dark-mode');
+                }
+            });
+
+        });
+    </script>
+    <input type="hidden" id="lblSessionTimeVal" value="20" />
+
+    <!-- page specific plugin scripts -->
+    <!-- ace scripts -->
+    <script src="/Content/ace/assets/js/ace-elements.min.js"></script>
+    <script src="/Content/ace/assets/js/ace.min.js"></script>
+    <script src="/Content/js/CommonFunction.js"></script>
+        <script src="/Content/js/BrowserOption.js"></script>
+    <script src="/Content/Plugins/x-editable/assets/mockjax/jquery.mockjax.js"></script>
+    <script src="/Content/Plugins/x-editable/assets/momentjs/moment.min.js"></script>
+    <script src="/Content/Plugins/x-editable/assets/select2/select2.js"></script>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    
+    <script src="/Content/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/Content/bootstro.js-master/bootstro.js"></script>
+    <script src="/Content/Plugins/garand-sticky/jquery.sticky.js"></script>
+    <script src="/Content/Plugins/Moment.js/moment-with-langs.js"></script>
+    <script src="/Content/ace/assets/js/dropzone.min.js"></script>
+    <script src="/Content/Plugins/timeout/jquery.sessionTimeout.min.js"></script>
+    <script src="/Content/Plugins/timeout/jquery.sessionTimeout.init.min.js"></script>
+    <div class="popcontentplaceholder"><div id="popcontentplaceholder-header" class="popcontentplaceholder-header"><h3 class="title"></h3><a class="btn btn-white pull-right" onclick="return closepopcontentplaceholder();">X</a></div><div id="popcontentplaceholder" class="popcontentplaceholder-content"></div></div>
+</body>
+</html>
